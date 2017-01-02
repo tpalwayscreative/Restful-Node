@@ -17,7 +17,6 @@ function  usersDBHandler(apiRoutes) {
         req.assert('name','name is required').notEmpty();
         req.assert('password','password is required').notEmpty();
         var errors = req.validationErrors();
-
         if(errors){
             res.json({
                 title : 'Sign up',
@@ -29,7 +28,6 @@ function  usersDBHandler(apiRoutes) {
 
             var timeNow = new Date().getTime();
             var apiKey = jwt.sign(req.body.email + timeNow,config.secret);
-
             var newObject = new users({
 
                 email : req.body.email,
@@ -46,7 +44,6 @@ function  usersDBHandler(apiRoutes) {
                 if(error){
                     res.json({
                         message : message,
-                        data:result,
                         error : false
                     });
                 }
@@ -57,7 +54,6 @@ function  usersDBHandler(apiRoutes) {
                         error : true
                     });
                 }
-
             });
         }
     });
@@ -67,7 +63,6 @@ function  usersDBHandler(apiRoutes) {
         req.assert('email','email is required').notEmpty();
         req.assert('password','password is required').notEmpty();
         var errors = req.validationErrors();
-
         if(errors){
             res.json({
                 title : 'Sign in',
@@ -76,34 +71,38 @@ function  usersDBHandler(apiRoutes) {
             });
         }
         else{
-
             var newObject = new users({
 
-                email : req.body.email,
-                password : bcrypt.compareSync(req.body.password,salt)
+                email : req.body.email
 
             });
-
-            newObject.signIn(function (error,result,message) {
-
+            newObject.signIn(function (error,result) {
                 if(error){
                     res.json({
-                        message : message,
-                        data:result,
-                        error : false
+                        message : 'Error occurred',
+                        error : true
                     });
                 }
                 else{
-                    res.json({
-                        message: message,
-                        data: result,
-                        error : true
-                    });
+                   var  password  = bcrypt.compareSync(req.body.password,result.password);
+                    if(password){
+                        res.json({
+                            message: 'SignIn is successful',
+                            data: {user:result,token:jwt.sign(result,config.secret)},
+                            error : false
+                        });
+                    }
+                    else{
+                        res.json({
+                            message: 'Please check email and password correctly',
+                            error : true
+                        });
+                    }
+
                 }
             });
         }
     })
-
 }
 
 module.exports = usersDBHandler;

@@ -13,8 +13,6 @@ var express = require('express'),
     port = process.env.PORT || 5000,
     server = http.createServer(app);
 
-
-
 var users  = require('./app/v1/users_DBHandler');
 
 mongoose.Promise = global.Promise;

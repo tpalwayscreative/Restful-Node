@@ -48,12 +48,21 @@ usersSchema.methods.signUp = function (cb) {
     });
 };
 
-usersSchema.methods.singIn = function () {
+usersSchema.methods.signIn = function (cb) {
 
-    this.model(models).find().exec(function (err,result) {
-
+    this.model(collection).find({email : this.email}).exec(function (err,result) {
+        if(err){
+            cb(true,null)
+        }
+        else{
+            if(result.length>0){
+                cb(false,result[0]);
+            }
+            else{
+                cb(true,null);
+            }
+        }
     });
-
 };
 
 module.exports = mongoose.model(collection,usersSchema);
