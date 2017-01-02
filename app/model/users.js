@@ -1,6 +1,3 @@
-/**
- * Created by phong on 12/18/16.
- */
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema ,
@@ -53,8 +50,9 @@ usersSchema.methods.signUp = function (cb) {
 
 usersSchema.methods.singIn = function () {
 
+    this.model(models).find().exec(function (err,result) {
 
-
+    });
 
 };
 

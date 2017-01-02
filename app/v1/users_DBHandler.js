@@ -80,11 +80,11 @@ function  usersDBHandler(apiRoutes) {
             var newObject = new users({
 
                 email : req.body.email,
-                password : bcrypt.hashSync(req.body.password,salt)
+                password : bcrypt.compareSync(req.body.password,salt)
 
             });
 
-            newObject.signUp(function (error,result,message) {
+            newObject.signIn(function (error,result,message) {
 
                 if(error){
                     res.json({
