@@ -9,8 +9,6 @@ var users = require('../model/users'),
     jwt = require('jsonwebtoken');
 
 
-
-
 function  usersDBHandler(apiRoutes) {
     this.apiRoutes = apiRoutes ;
     this.apiRoutes.post('/signUp',function (req,res) {
@@ -30,7 +28,6 @@ function  usersDBHandler(apiRoutes) {
         else{
 
             var timeNow = new Date().getTime();
-
             var apiKey = jwt.sign(req.body.email + timeNow,config.secret);
 
             var newObject = new users({

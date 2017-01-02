@@ -36,7 +36,6 @@ var usersSchema = new Schema({
         required: true
     }
 
-
 });
 
 usersSchema.methods.signUp = function (cb) {
@@ -52,14 +51,12 @@ usersSchema.methods.signUp = function (cb) {
     });
 };
 
-
 usersSchema.methods.singIn = function () {
 
 
 
 
 };
-
 
 module.exports = mongoose.model(collection,usersSchema);
 
