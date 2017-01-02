@@ -1,6 +1,4 @@
-/**
- * Created by phong on 12/18/16.
- */
+
 
 var users = require('../model/users'),
     bcrypt = require('bcryptjs'),
