@@ -16,7 +16,7 @@ function  usersDBHandler(apiRoutes) {
         req.assert('password','password is required').notEmpty();
         var errors = req.validationErrors();
         if(errors){
-            res.json({
+            res.status(400).json({
                 title : 'Sign up',
                 message : errors,
                 error : true
@@ -62,7 +62,7 @@ function  usersDBHandler(apiRoutes) {
         req.assert('password','password is required').notEmpty();
         var errors = req.validationErrors();
         if(errors){
-            res.json({
+            res.status(400).json({
                 title : 'Sign in',
                 message : errors,
                 error : true

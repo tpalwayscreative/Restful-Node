@@ -10,7 +10,7 @@ var express = require('express'),
     http = require('http'),
     config = require('./app/config/database'),
     mongoose = require('mongoose'),
-    port = process.env.PORT || 5000,
+    port = process.env.PORT || 7000,
     server = http.createServer(app);
 
 var users  = require('./app/v1/users_DBHandler');
