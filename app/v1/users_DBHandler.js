@@ -11,7 +11,7 @@ function  usersDBHandler(apiRoutes) {
     this.apiRoutes = apiRoutes ;
     this.apiRoutes.post('/signUp',function (req,res) {
 
-        req.assert('email','email is required').notEmpty();
+        req.assert('email','email is required').notEmpty().withMessage("email is required").isEmail();
         req.assert('name','name is required').notEmpty();
         req.assert('password','password is required').notEmpty();
         var errors = req.validationErrors();
